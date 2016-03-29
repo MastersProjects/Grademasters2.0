@@ -20,8 +20,28 @@ public class UserJDBCdao extends Database{
 			e.printStackTrace();
 		} finally{
 			closeCon();
+		}	
+	}
+	
+	public String loginUser(String username){
+		openCon();
+		String password = null;
+		try {
+			ps = con.prepareStatement("SELECT * FROM USER WHERE Username = ?");			
+			ps.setString(1, username);		
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {			 
+			      password = rs.getString("Password");
+			}
+					      
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally{
+			closeCon();
 		}
-		
+		return password;		
 	}
 
 }
