@@ -1,15 +1,16 @@
 package ch.grademasters.controller;
 
+import ch.grademasters.database.SemesterJDBCdao;
 import ch.grademasters.database.UserJDBCdao;
 
 public class Controller {
 	private static Controller instance = new Controller();
 	
 	private final UserJDBCdao USER_JDBC = new UserJDBCdao();
+	private final SemesterJDBCdao SEMESTER_JDBC = new SemesterJDBCdao();
 	
 	
 	private Controller() {
-
 	}
 	
 	public static Controller getInstance(){
@@ -32,6 +33,10 @@ public class Controller {
 		}
 		
 		return login;	
+	}
+	
+	public void createSemester(String name, String school, String username){
+		SEMESTER_JDBC.createSemester(name, school, username);
 	}
 	
 	
