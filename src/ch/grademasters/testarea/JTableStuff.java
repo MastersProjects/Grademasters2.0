@@ -1,25 +1,36 @@
-package ch.grademasters.gui;
+package ch.grademasters.testarea;
 
-import javax.swing.JFrame;
-import java.awt.CardLayout;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JButton;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.JTable;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.Vector;
 
-public class Grademasters extends JFrame{
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+
+import ch.grademasters.model.Semester;
+import ch.grademasters.model.Subject;
+import ch.grademasters.model.User;
+
+public class JTableStuff extends JFrame{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private User user;
 	
 	
 	private JPanel cards;
@@ -32,7 +43,67 @@ public class Grademasters extends JFrame{
 	private JTable subjectTable;
 	private JTable examTable;
 	
-	public Grademasters() {
+	public JTableStuff() {
+		
+		
+		Subject subject1 = new Subject();
+		subject1.setId(1);
+		subject1.setName("Fach1");
+		Subject subject2 = new Subject();
+		subject1.setId(1);
+		subject1.setName("Fach1");
+		Subject subject3 = new Subject();
+		subject1.setId(1);
+		subject1.setName("Fach1");
+		
+		ArrayList<Subject> subjects1 = new ArrayList<Subject>();
+		subjects1.add(subject1);
+		subjects1.add(subject2);
+		ArrayList<Subject> subjects2 = new ArrayList<Subject>();
+		subjects2.add(subject3);
+		
+		Semester semester1 = new Semester();
+		semester1.setId(1);
+		semester1.setName("Semester1");
+		semester1.setSchool("School1");
+		semester1.setSubjects(subjects1);
+		
+		Semester semester2 = new Semester();		
+		semester2.setId(2);
+		semester2.setName("Semester2");
+		semester2.setSchool("School2");
+		semester2.setSubjects(subjects2);
+		
+		ArrayList<Semester> semesters = new ArrayList<Semester>();
+		semesters.add(semester1);
+		semesters.add(semester2);
+		
+		user = new User();
+		user.setSemesters(semesters);
+		
+		
+		Vector<Object> columnName = new Vector<Object>();
+		columnName.add("Name");
+		columnName.add("Schule");
+		columnName.add("Fächer");
+
+
+		
+		Vector<Vector> data = new Vector<Vector>();
+		
+		for(Semester semester : user.getSemesters()){
+			Vector<Object> row = new Vector<Object>();
+			row.add(semester.getName());
+			row.add(semester.getSchool());
+			row.add("->");
+
+			data.add(row);
+		}
+		
+		TableModel modelT = new DefaultTableModel(data, columnName);
+		
+		
+		
 		setTitle("GradeMasters");
 		setBounds(100, 100, 527, 461);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -79,8 +150,17 @@ public class Grademasters extends JFrame{
 		semesterCard.add(semesterCenterPanel, BorderLayout.CENTER);
 		semesterCenterPanel.setLayout(new BorderLayout(0, 0));
 		
-		semesterTable = new JTable();
+		
+	
+		
+		semesterTable = new JTable(modelT);
 		semesterCenterPanel.add(semesterTable);
+		semesterTable.setEnabled(false);
+		
+		
+		TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+		semesterTable.getColumn("Fächer").setCellRenderer(buttonRenderer);
+		
 		
 		JPanel semesterSouthPanel = new JPanel();
 		semesterCard.add(semesterSouthPanel, BorderLayout.SOUTH);
