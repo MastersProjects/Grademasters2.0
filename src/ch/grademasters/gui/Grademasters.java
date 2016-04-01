@@ -1,17 +1,17 @@
 package ch.grademasters.gui;
 
-import javax.swing.JFrame;
-import java.awt.CardLayout;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JButton;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 public class Grademasters extends JFrame{
