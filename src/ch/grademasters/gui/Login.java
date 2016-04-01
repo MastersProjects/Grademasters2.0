@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -20,17 +22,19 @@ public class Login extends JFrame {
 	
 	//InputField
 	private JTextField inp_username;
-	private JTextField textField;
+	private JTextField inp_password;
 	
 	//Label
 	private JLabel lblUsername;
-	private JLabel lblPasswort;
+	private JLabel lblPassword;
 	private JLabel lblTitel;
 	
 	//Panel
 	private JPanel panel_buttons;
 	private JPanel panel_form;
 	private JPanel contentPane;
+	
+	private SpringLayout form_springLayout;
 	
 	//Button
 	private JButton btnAbbrechen;
@@ -45,8 +49,8 @@ public class Login extends JFrame {
 		//Set Panels
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
 		//Panel for Buttons
 		panel_buttons = new JPanel();
@@ -56,32 +60,14 @@ public class Login extends JFrame {
 		//Panel for form
 		panel_form = new JPanel();
 		contentPane.add(panel_form, BorderLayout.CENTER);
-		panel_form.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		form_springLayout = new SpringLayout();
+		panel_form.setLayout(form_springLayout);
 		
 		//Set Labels
 		lblTitel = new JLabel("GradeMasters Login");
 		lblTitel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		lblUsername = new JLabel("Username");
-		lblPasswort = new JLabel("Passwort");
+		lblPassword = new JLabel("Passwort");
 		
 		//Set Buttons
 		btnAbbrechen = new JButton("Abbrechen");
@@ -90,10 +76,12 @@ public class Login extends JFrame {
 
 		//Set Textfields
 		inp_username = new JTextField();
+		form_springLayout.putConstraint(SpringLayout.NORTH, inp_username, -3, SpringLayout.NORTH, lblUsername);
+		form_springLayout.putConstraint(SpringLayout.EAST, inp_username, -73, SpringLayout.EAST, panel_form);
 		inp_username.setColumns(10);
 
-		textField = new JTextField();
-		textField.setColumns(10);
+		inp_password = new JTextField();
+		inp_password.setColumns(10);
 		
 		//Add Buttons to panel_buttons
 		panel_buttons.add(btnAbbrechen);
@@ -101,13 +89,27 @@ public class Login extends JFrame {
 		panel_buttons.add(btnRegistrieren);
 		
 		//Add Labels and Textfields to form
-		panel_form.add(lblUsername, "4, 4");
-		panel_form.add(lblPasswort, "4, 6");
-		panel_form.add(inp_username, "10, 4, left, default");
-		panel_form.add(textField, "10, 6, left, default");
+		form_springLayout.putConstraint(SpringLayout.NORTH, lblUsername, 30, SpringLayout.NORTH, panel_form);
+		form_springLayout.putConstraint(SpringLayout.WEST, lblUsername, 22, SpringLayout.WEST, panel_form);
+		panel_form.add(lblUsername);
+		panel_form.add(inp_username);
+		inp_username.setColumns(10);
 		
+		form_springLayout.putConstraint(SpringLayout.NORTH, lblPassword, 16, SpringLayout.SOUTH, lblUsername);
+		form_springLayout.putConstraint(SpringLayout.WEST, lblPassword, 0, SpringLayout.WEST, lblUsername);
+		panel_form.add(lblPassword);
+		
+		inp_password = new JTextField();
+		form_springLayout.putConstraint(SpringLayout.WEST, inp_password, 33, SpringLayout.EAST, lblPassword);
+		form_springLayout.putConstraint(SpringLayout.EAST, inp_password, -73, SpringLayout.EAST, panel_form);
+		form_springLayout.putConstraint(SpringLayout.WEST, inp_username, 0, SpringLayout.WEST, inp_password);
+		form_springLayout.putConstraint(SpringLayout.NORTH, inp_password, -3, SpringLayout.NORTH, lblPassword);
+		panel_form.add(inp_password);
+		inp_password.setColumns(10);
+				
 		//Add title to contentPane
 		contentPane.add(lblTitel, BorderLayout.NORTH);
+		
+		setVisible(true);
 	}
-
 }

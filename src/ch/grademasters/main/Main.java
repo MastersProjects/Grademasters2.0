@@ -1,11 +1,13 @@
 package ch.grademasters.main;
 
 import ch.grademasters.gui.Grademasters;
+import ch.grademasters.gui.Login;
+import ch.grademasters.gui.Login2;
 
 public class Main {
 
 	public static void main(String[] args) {
-//		new Login();
+		new Login();
 //		UserJDBCdao data = new UserJDBCdao();
 //		data.registerUser("Phong6698", "Phong", "Penglerd", "Phong@hotmail.ch", "1234");
 //		System.out.println(data.loginUser("Phong6698"));
