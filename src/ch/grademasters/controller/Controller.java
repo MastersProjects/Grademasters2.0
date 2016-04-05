@@ -45,12 +45,12 @@ public class Controller {
 		SEMESTER_JDBC.createSemester(name, school, username);
 	}
 	
-	public void createSubject(String name, String school, String username){
-		SUBJECT_JDBC.createSubject(name, school, username);
+	public void createSubject(String name, String school, int subject_id){
+		SUBJECT_JDBC.createSubject(name, school, subject_id);
 	}
 	
-	public void createExam(String name, Double grade, Date date, Boolean count, String subject){
-		EXAM_JDBC.createExam(name, grade, date, count, subject);
+	public void createExam(String name, Double grade, Date date, Boolean count, int subject_id){
+		EXAM_JDBC.createExam(name, grade, date, count, subject_id);
 	}
 	
 	

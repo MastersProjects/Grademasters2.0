@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class ExamJDBCdao extends Database {
 
-	public void createExam(String name, Double grade, Date date, Boolean count, String subject) {
+	public void createExam(String name, Double grade, Date date, Boolean count, int subject_id) {
 		openCon();
 		try {
 			ps = con.prepareStatement("INSERT INTO EXAM VALUES (?,?,?,?,?,?);");
@@ -23,7 +23,7 @@ public class ExamJDBCdao extends Database {
 			ps.setDouble(2, grade);
 			ps.setDate(3, date);
 			ps.setBoolean(4, count);
-			ps.setString(5, subject);
+			ps.setInt(5, subject_id);
 
 			ps.executeUpdate();
 		} catch (SQLException e) {

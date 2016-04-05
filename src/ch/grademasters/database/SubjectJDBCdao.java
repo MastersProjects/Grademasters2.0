@@ -13,7 +13,7 @@ import java.sql.SQLException;
  */
 public class SubjectJDBCdao extends Database{
 
-	public void createSubject(String name, String school, String username){
+	public void createSubject(String name, String school, int semester_id){
 		openCon();
 		try{
 			ps = con.prepareStatement("INSERT INTO SUBJECT VALUES(?,?,?,?);");
@@ -21,7 +21,7 @@ public class SubjectJDBCdao extends Database{
 			ps.setString(1, null);
 			ps.setString(2, name);
 			ps.setString(3, school);
-			ps.setString(4, username);
+			ps.setInt(4, semester_id);
 			
 			ps.executeUpdate();
 		} catch (SQLException e){
