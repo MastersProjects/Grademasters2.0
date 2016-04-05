@@ -1,6 +1,10 @@
 package ch.grademasters.controller;
 
+import java.sql.Date;
+
+import ch.grademasters.database.ExamJDBCdao;
 import ch.grademasters.database.SemesterJDBCdao;
+import ch.grademasters.database.SubjectJDBCdao;
 import ch.grademasters.database.UserJDBCdao;
 
 public class Controller {
@@ -8,6 +12,8 @@ public class Controller {
 	
 	private final UserJDBCdao USER_JDBC = new UserJDBCdao();
 	private final SemesterJDBCdao SEMESTER_JDBC = new SemesterJDBCdao();
+	private final SubjectJDBCdao SUBJECT_JDBC = new SubjectJDBCdao();
+	private final ExamJDBCdao EXAM_JDBC = new ExamJDBCdao();
 	
 	
 	private Controller() {
@@ -29,14 +35,20 @@ public class Controller {
 			login = true;
 		}else{
 			login = false;
-			//TODO JDialog 
 		}
-		
 		return login;	
 	}
 	
 	public void createSemester(String name, String school, String username){
 		SEMESTER_JDBC.createSemester(name, school, username);
+	}
+	
+	public void createSubject(String name, String school, int subject_id){
+		SUBJECT_JDBC.createSubject(name, school, subject_id);
+	}
+	
+	public void createExam(String name, Double grade, Date date, Boolean count, int subject_id){
+		EXAM_JDBC.createExam(name, grade, date, count, subject_id);
 	}
 	
 	
