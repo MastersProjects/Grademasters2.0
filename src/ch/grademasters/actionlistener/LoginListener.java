@@ -29,7 +29,7 @@ public class LoginListener implements ActionListener {
 			
 			System.out.println(password);
 			if(Controller.getInstance().loginUser(username, password)==true){
-				new Grademasters();
+				new Grademasters(Controller.getInstance().getUserInfos(username));
 			} else {
 				JOptionPane.showMessageDialog(null, "Username und Password stimmen nicht \u00fcberein", "Login fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
 			} 

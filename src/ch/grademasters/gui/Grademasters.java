@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import ch.grademasters.model.User;
+
 public class Grademasters extends JFrame{
 
 	/**
@@ -21,6 +23,7 @@ public class Grademasters extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private User user;
 	
 	private JPanel cards;
 	
@@ -32,7 +35,8 @@ public class Grademasters extends JFrame{
 	private JTable subjectTable;
 	private JTable examTable;
 	
-	public Grademasters() {
+	public Grademasters(User user) {
+		this.user = user;
 		setTitle("GradeMasters");
 		setBounds(100, 100, 527, 461);
 		getContentPane().setLayout(new BorderLayout(0, 0));

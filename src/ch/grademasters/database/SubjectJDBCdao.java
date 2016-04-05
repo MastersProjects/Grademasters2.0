@@ -4,6 +4,9 @@
 package ch.grademasters.database;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import ch.grademasters.model.Subject;
 
 /**
  * @description
@@ -29,6 +32,32 @@ public class SubjectJDBCdao extends Database{
 		} finally {
 			closeCon();
 		}
+	}
+	
+	public ArrayList<Subject> getSubjectsBySemesterID(int semesterID){
+		openCon();
+		ArrayList<Subject> subjects = new ArrayList<Subject>(); 
+		try {
+			ps = con.prepareStatement("SELECT * FROM SUBJECT WHERE Semester_ID = ?");			
+			ps.setInt(1, semesterID);		
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {			 
+				Subject subject = new Subject();
+				subject.setId(rs.getInt("ID_Subject"));
+				subject.setName(rs.getString("Name"));
+				
+				subjects.add(subject);
+			}
+					      
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally{
+			closeCon();
+		}
+		
+		return subjects;
 	}
 	
 }

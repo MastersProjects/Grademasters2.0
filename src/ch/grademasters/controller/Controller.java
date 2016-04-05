@@ -1,11 +1,16 @@
 package ch.grademasters.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import ch.grademasters.database.ExamJDBCdao;
 import ch.grademasters.database.SemesterJDBCdao;
 import ch.grademasters.database.SubjectJDBCdao;
 import ch.grademasters.database.UserJDBCdao;
+import ch.grademasters.model.Exam;
+import ch.grademasters.model.Semester;
+import ch.grademasters.model.Subject;
+import ch.grademasters.model.User;
 
 public class Controller {
 	private static Controller instance = new Controller();
@@ -37,6 +42,23 @@ public class Controller {
 			login = false;
 		}
 		return login;	
+	}
+	
+	public User getUserInfos(String username){
+		User user = new User();
+		user.setUsername(username);
+		ArrayList<Semester> semesters = SEMESTER_JDBC.getSemestersByUsername(username); //Semsters
+		for(Semester semester : semesters){
+			ArrayList<Subject> subjects = SUBJECT_JDBC.getSubjectsBySemesterID(semester.getId()); //Subjects
+			for(Subject subject : subjects){
+				ArrayList<Exam> exams = EXAM_JDBC.getExamsBySubjectID(subject.getId());
+				subject.setExams(exams);
+			}
+			semester.setSubjects(subjects);
+		}
+		user.setSemesters(semesters);
+		
+		return user;
 	}
 	
 	public void createSemester(String name, String school, String username){

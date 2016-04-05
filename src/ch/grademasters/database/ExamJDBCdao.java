@@ -5,6 +5,10 @@ package ch.grademasters.database;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import ch.grademasters.model.Exam;
+import ch.grademasters.model.Subject;
 
 /**
  * @description
@@ -31,5 +35,34 @@ public class ExamJDBCdao extends Database {
 		} finally {
 			closeCon();
 		}
+	}
+	
+	public ArrayList<Exam> getExamsBySubjectID(int subjectID){
+		openCon();
+		ArrayList<Exam> exams = new ArrayList<Exam>(); 
+		try {
+			ps = con.prepareStatement("SELECT * FROM EXAM WHERE Subject_ID = ?");			
+			ps.setInt(1, subjectID);		
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {			 
+				Exam exam = new Exam();
+				exam.setId(rs.getInt("ID_Exam"));
+				exam.setName(rs.getString("Name"));
+				exam.setGrade(rs.getFloat("Grade"));
+				//TODO Date
+				exam.setCount(rs.getBoolean("Grade"));
+				
+				exams.add(exam);
+			}
+					      
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally{
+			closeCon();
+		}
+		
+		return exams;
 	}
 }
