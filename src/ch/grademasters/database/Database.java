@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class Database {
 	
 	private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -27,6 +29,7 @@ public class Database {
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Datenbank wurde nicht gefunden", "Network Error!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
