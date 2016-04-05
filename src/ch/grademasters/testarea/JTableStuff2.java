@@ -22,8 +22,12 @@ import javax.swing.table.TableModel;
 import ch.grademasters.model.Semester;
 import ch.grademasters.model.Subject;
 import ch.grademasters.model.User;
+import javax.swing.JScrollPane;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class JTableStuff extends JFrame{
+public class JTableStuff2 extends JFrame{
 
 	/**
 	 * 
@@ -31,7 +35,8 @@ public class JTableStuff extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
 	private User user;
-
+	
+	
 	private JPanel cards;
 	
 	private JPanel semesterCard;
@@ -42,29 +47,24 @@ public class JTableStuff extends JFrame{
 	private JTable subjectTable;
 	private JTable examTable;
 	
-	public JTableStuff() {
+	public JTableStuff2() {
 		
 		
 		Subject subject1 = new Subject();
 		subject1.setId(1);
 		subject1.setName("Fach1");
 		Subject subject2 = new Subject();
-		subject2.setId(1);
-		subject2.setName("Fach2");
+		subject1.setId(1);
+		subject1.setName("Fach1");
 		Subject subject3 = new Subject();
-		subject3.setId(1);
-		subject3.setName("Fach3");
-		Subject subject4 = new Subject();
-		subject4.setId(1);
-		subject4.setName("Fach4");
+		subject1.setId(1);
+		subject1.setName("Fach1");
 		
 		ArrayList<Subject> subjects1 = new ArrayList<Subject>();
 		subjects1.add(subject1);
 		subjects1.add(subject2);
 		ArrayList<Subject> subjects2 = new ArrayList<Subject>();
 		subjects2.add(subject3);
-		ArrayList<Subject> subjects3 = new ArrayList<Subject>();
-		subjects3.add(subject4);
 		
 		Semester semester1 = new Semester();
 		semester1.setId(1);
@@ -78,20 +78,18 @@ public class JTableStuff extends JFrame{
 		semester2.setSchool("School2");
 		semester2.setSubjects(subjects2);
 		
-		Semester semester3 = new Semester();		
-		semester3.setId(2);
-		semester3.setName("Semester3");
-		semester3.setSchool("School3");
-		semester3.setSubjects(subjects3);
-		
 		ArrayList<Semester> semesters = new ArrayList<Semester>();
 		semesters.add(semester1);
 		semesters.add(semester2);
-		semesters.add(semester3);
 		
 		user = new User();
 		user.setSemesters(semesters);
 		
+		
+		Vector<Object> columnName = new Vector<Object>();
+		columnName.add("Name");
+		columnName.add("Schule");
+		columnName.add("Fächer");		
 		
 		
 		setTitle("GradeMasters");
@@ -138,46 +136,80 @@ public class JTableStuff extends JFrame{
 		
 		JPanel semesterCenterPanel = new JPanel();
 		semesterCard.add(semesterCenterPanel, BorderLayout.CENTER);
-		semesterCenterPanel.setLayout(new BorderLayout(0, 0));
+		semesterCenterPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
+		JScrollPane scrollPane = new JScrollPane();
+		semesterCenterPanel.add(scrollPane);
 		
-		Vector<Object> columnNames = new Vector<Object>();
-		columnNames.add("Name");
-		columnNames.add("Schule");
-		columnNames.add("Durchschnitt");
-		columnNames.add("Fächer");
+		JPanel panel = new JPanel();
+		scrollPane.setViewportView(panel);
+		panel.setLayout(new GridLayout(0, 4, 5, 5));
 		
-		Vector<Object> columnTypes = new Vector<Object>();
-		columnTypes.add(String.class);
-		columnTypes.add(String.class);
-		columnTypes.add(Integer.class);
-		columnTypes.add(JButton.class);
-
-
+		JButton btnNewButton = new JButton("1");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		panel.add(btnNewButton);
 		
-		Vector<Vector> datas = new Vector<Vector>();
+		JButton btnNewButton_1 = new JButton("1.1");
+		panel.add(btnNewButton_1);
 		
-		for(Semester semester : user.getSemesters()){
-			Vector<Object> row = new Vector<Object>();
-			row.add(semester.getName());
-			row.add(semester.getSchool());
-			row.add(1);
-			row.add("->");
-
-			datas.add(row);
-		}
+		JButton btnNewButton_2 = new JButton("1.2");
+		panel.add(btnNewButton_2);
 		
+		JButton btnNewButton_3 = new JButton("1.3");
+		panel.add(btnNewButton_3);
 		
-		semesterTable = new JTable(new CostumTableModel(columnNames, columnTypes, datas, this));
-		semesterCenterPanel.add(semesterTable);
-		semesterTable.setEnabled(false);
-		TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-		semesterTable.getColumn("Fächer").setCellRenderer(buttonRenderer);
-		semesterTable.addMouseListener(new JTableButtonMouseListener(semesterTable));
+		JButton btnNewButton_4 = new JButton("New button");
+		panel.add(btnNewButton_4);
 		
+		JButton btnNewButton_5 = new JButton("New button");
+		panel.add(btnNewButton_5);
 		
+		JButton btnNewButton_6 = new JButton("New button");
+		panel.add(btnNewButton_6);
 		
+		JButton btnNewButton_7 = new JButton("New button");
+		panel.add(btnNewButton_7);
 		
+		JButton btnNewButton_8 = new JButton("New button");
+		panel.add(btnNewButton_8);
+		
+		JButton btnNewButton_9 = new JButton("New button");
+		panel.add(btnNewButton_9);
+		
+		JButton btnNewButton_10 = new JButton("New button");
+		panel.add(btnNewButton_10);
+		
+		JButton btnNewButton_11 = new JButton("New button");
+		panel.add(btnNewButton_11);
+		
+		JButton btnNewButton_12 = new JButton("New button");
+		panel.add(btnNewButton_12);
+		
+		JButton btnNewButton_13 = new JButton("New button");
+		panel.add(btnNewButton_13);
+		
+		JButton btnNewButton_14 = new JButton("New button");
+		panel.add(btnNewButton_14);
+		
+		JButton btnNewButton_15 = new JButton("New button");
+		panel.add(btnNewButton_15);
+		
+		JButton btnNewButton_16 = new JButton("New button");
+		panel.add(btnNewButton_16);
+		
+		JButton btnNewButton_17 = new JButton("New button");
+		panel.add(btnNewButton_17);
+		
+		JButton btnNewButton_18 = new JButton("New button");
+		panel.add(btnNewButton_18);
+		
+		JButton btnNewButton_19 = new JButton("New button");
+		panel.add(btnNewButton_19);
+		
+	
 		
 		JPanel semesterSouthPanel = new JPanel();
 		semesterCard.add(semesterSouthPanel, BorderLayout.SOUTH);
@@ -287,15 +319,6 @@ public class JTableStuff extends JFrame{
 //	    cl.show(cards, "examCard");
 
 		setVisible(true);
-	}
-	
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }
