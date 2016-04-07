@@ -14,17 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+import ch.grademasters.actionlistener.MainListener;
 import ch.grademasters.model.User;
 
 public class Grademasters extends JFrame{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private User user;
-	
 	private JPanel cards;
 	
 	private JPanel semesterCard;
@@ -34,6 +31,8 @@ public class Grademasters extends JFrame{
 	private JTable semesterTable;
 	private JTable subjectTable;
 	private JTable examTable;
+
+	private MainListener actionListener;
 	
 	public Grademasters(User user) {
 		this.user = user;
@@ -90,9 +89,13 @@ public class Grademasters extends JFrame{
 		semesterCard.add(semesterSouthPanel, BorderLayout.SOUTH);
 		semesterSouthPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 		
-		JButton semesterBackButton = new JButton("Abmelden");
-		semesterSouthPanel.add(semesterBackButton);
+		JButton semesterLogoutButton = new JButton("Abmelden");
+		semesterSouthPanel.add(semesterLogoutButton);
 		
+		//ActionListener
+			actionListener = new MainListener(this);
+			semesterAddButton.addActionListener(actionListener);
+			semesterLogoutButton.addActionListener(actionListener);
 		
 		/*
 		 * Subject Card

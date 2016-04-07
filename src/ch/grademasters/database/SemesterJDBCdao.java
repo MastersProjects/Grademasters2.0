@@ -30,7 +30,7 @@ public class SemesterJDBCdao extends Database{
 		openCon();
 		ArrayList<Semester> semesters = new ArrayList<Semester>(); 
 		try {
-			ps = con.prepareStatement("SELECT * FROM SEMESTER WHERE Username = ?");			
+			ps = con.prepareStatement("SELECT * FROM SEMESTER WHERE Username_ID = ?");			
 			ps.setString(1, username);		
 			rs = ps.executeQuery();
 			

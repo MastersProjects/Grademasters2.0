@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 import ch.grademasters.model.Subject;
-import ch.grademasters.model.User;
 
 public class ButtonListener implements ActionListener{
 

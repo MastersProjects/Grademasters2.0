@@ -15,7 +15,7 @@ public class Database {
 	
 	private final String DB_URL = "jdbc:mysql://localhost/Grademasters";
 	private final String USER = "root";
-	private final String PASS = "1234";
+	private final String PASS = "";
 	
 	protected Connection con = null;
 	protected Statement stmt = null;

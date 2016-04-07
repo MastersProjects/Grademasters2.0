@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ch.grademasters.model.Exam;
-import ch.grademasters.model.Subject;
 
 /**
  * @description
