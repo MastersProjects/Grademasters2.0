@@ -1,16 +1,9 @@
 package ch.grademasters.actionlistener;
 
-import java.awt.CardLayout;
 import java.util.ArrayList;
-import java.util.Vector;
-
-import javax.swing.JButton;
-import javax.swing.table.TableCellRenderer;
 
 import ch.grademasters.gui.Grademasters;
 import ch.grademasters.model.Exam;
-import ch.grademasters.utils.CostumTableModel;
-import ch.grademasters.utils.JTableButtonRenderer;
 
 public class ExamTableButtonListener extends JTableButtonListener {
 

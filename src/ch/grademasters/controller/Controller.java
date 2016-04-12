@@ -28,7 +28,7 @@ public class Controller {
 		return instance;
 	}
 	
-	public void registerUser(String username, String firstname, String lastname, String email, String password, String password2){
+	public void registerUser(String username, String firstname, String lastname, String email, String password){
 	
 		USER_JDBC.registerUser(username, firstname, lastname, email, password);
 	}

@@ -36,6 +36,7 @@ public class SubjectTableButtonListener extends JTableButtonListener {
 		columnTypes.add(Integer.class);
 		columnTypes.add(JButton.class);
 		
+		@SuppressWarnings("rawtypes")
 		Vector<Vector> datas = new Vector<Vector>();
 		
 		if(subjects.get(iterator).getExams() != null){

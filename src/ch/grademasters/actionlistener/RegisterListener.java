@@ -52,13 +52,12 @@ public class RegisterListener implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Username ist bereits vergeben", "Warnung!",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
-				Controller.getInstance().registerUser(username, firstname, lastname, email, password, password2);
+				Controller.getInstance().registerUser(username, firstname, lastname, email, password);
 				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich registriert", "Registration!",
 						JOptionPane.INFORMATION_MESSAGE);
 				frame.dispose();
 				new Login();
 			}
-			Controller.getInstance().registerUser(username, firstname, lastname, email, password, password2);
 		} else if (button.getText().equals("Abbrechen")) {
 			System.exit(0);
 		}

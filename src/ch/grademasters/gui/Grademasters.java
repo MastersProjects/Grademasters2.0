@@ -220,6 +220,7 @@ public class Grademasters extends JFrame{
 		columnTypes.add(Integer.class);
 		columnTypes.add(JButton.class);
 		
+		@SuppressWarnings("rawtypes")
 		Vector<Vector> datas = new Vector<Vector>();
 		
 		if(user.getSemesters() != null){

@@ -2,8 +2,10 @@ package ch.grademasters.main;
 
 import java.util.ArrayList;
 
+import ch.grademasters.controller.Controller;
 import ch.grademasters.gui.Grademasters;
 import ch.grademasters.gui.Login;
+import ch.grademasters.gui.Registration;
 import ch.grademasters.model.Semester;
 import ch.grademasters.model.Subject;
 import ch.grademasters.model.User;
@@ -11,7 +13,8 @@ import ch.grademasters.model.User;
 public class Main {
 
 	public static void main(String[] args) {
-		new Login();
+		new Registration();
+//		new Login();
 //		UserJDBCdao data = new UserJDBCdao();
 //		data.registerUser("Phong6698", "Phong", "Penglerd", "Phong@hotmail.ch", "1234");
 //		System.out.println(data.loginUser("Phong6698"));
@@ -75,7 +78,9 @@ public class Main {
 		user.setSemesters(semesters);
 		user.setUsername("HansNötig");
 		
-		new Grademasters(user);
+//		new Grademasters(user);
+		
+//		new Grademasters(Controller.getInstance().getUserInfos("TEst"));
 
 	}
 

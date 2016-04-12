@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.table.TableCellRenderer;
 
 import ch.grademasters.gui.Grademasters;
-import ch.grademasters.model.Semester;
 import ch.grademasters.model.Subject;
 import ch.grademasters.utils.CostumTableModel;
 import ch.grademasters.utils.JTableButtonRenderer;
@@ -30,6 +29,7 @@ public class SemesterTableButtonListener extends JTableButtonListener{
 		columnTypes.add(Integer.class);
 		columnTypes.add(JButton.class);
 		
+		@SuppressWarnings("rawtypes")
 		Vector<Vector> datas = new Vector<Vector>();
 		
 		if(getGrademasters().getUser().getSemesters().get(iterator).getSubjects() != null){

@@ -8,6 +8,10 @@ import javax.swing.JButton;
 
 import ch.grademasters.gui.Grademasters;
 
+/**
+ * An abstract Listener class for JButton in JTable
+ *
+ */
 public abstract class JTableButtonListener implements ActionListener{
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
 	private Grademasters grademasters;
@@ -29,10 +33,11 @@ public abstract class JTableButtonListener implements ActionListener{
 		
 	}
 	
+	/**
+	 * After actionPerformed create Table and change Card
+	 * @param iterator
+	 */
 	public abstract void createTableModel(int iterator);
-//	for(Subject subject : grademasters.getUser().getSemesters().get(iterator).getSubjects()){
-//	System.out.println(subject.getName());
-//}
 	
 	public ArrayList<JButton> getButtons() {
 		return buttons;
