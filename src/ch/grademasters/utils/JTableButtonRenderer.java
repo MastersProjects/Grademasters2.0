@@ -1,4 +1,4 @@
-package ch.grademasters.testarea;
+package ch.grademasters.utils;
 
 import java.awt.Component;
 
@@ -11,7 +11,7 @@ public class JTableButtonRenderer implements TableCellRenderer {
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 		JButton button = new JButton();
-//		button.setText((String)value);
+		button.setText("->");
         return button; 
 	}
 
