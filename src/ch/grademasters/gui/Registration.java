@@ -15,6 +15,7 @@ import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 import ch.grademasters.actionlistener.LoginListener;
+import ch.grademasters.actionlistener.RegisterListener;
 import ch.grademasters.utils.MD5;
 
 public class Registration extends JFrame {
@@ -22,11 +23,11 @@ public class Registration extends JFrame {
 	
 	//InputField
 	private JTextField inp_email;
-	private JPasswordField inp_username;
+	private JTextField inp_username;
 	private JTextField inp_lastname;
 	private JTextField inp_firstname;
-	private JTextField inp_password2;
-	private JTextField inp_password1;
+	private JPasswordField inp_password2;
+	private JPasswordField inp_password1;
 	
 	//Label
 	private JLabel lblUsername;
@@ -88,7 +89,7 @@ public class Registration extends JFrame {
 		btnRegistrieren = new JButton("Registrieren");
 		
 		//ActionListener
-		actionListener = new LoginListener(this);
+		actionListener = new RegisterListener(this);
 		btnAbbrechen.addActionListener(actionListener);
 		btnRegistrieren.addActionListener(actionListener);
 
@@ -110,7 +111,7 @@ public class Registration extends JFrame {
 		inp_email.setColumns(10);
 		panel_form.add(lblEmail);
 		
-		inp_username = new JPasswordField();
+		inp_username = new JTextField();
 		form_springLayout.putConstraint(SpringLayout.WEST, inp_username, 27, SpringLayout.EAST, lblUsername);
 		form_springLayout.putConstraint(SpringLayout.EAST, inp_username, -43, SpringLayout.EAST, panel_form);
 		form_springLayout.putConstraint(SpringLayout.WEST, inp_email, 0, SpringLayout.WEST, inp_username);
@@ -145,7 +146,7 @@ public class Registration extends JFrame {
 		form_springLayout.putConstraint(SpringLayout.WEST, lblPasswort, 0, SpringLayout.WEST, lblUsername);
 		panel_form.add(lblPasswort);
 		
-		inp_password2 = new JTextField();
+		inp_password2 = new JPasswordField();
 		form_springLayout.putConstraint(SpringLayout.NORTH, inp_password2, -6, SpringLayout.NORTH, lblPasswort);
 		form_springLayout.putConstraint(SpringLayout.WEST, inp_password2, 0, SpringLayout.WEST, inp_lastname);
 		form_springLayout.putConstraint(SpringLayout.EAST, inp_password2, 92, SpringLayout.WEST, inp_lastname);
@@ -156,7 +157,7 @@ public class Registration extends JFrame {
 		form_springLayout.putConstraint(SpringLayout.WEST, lblPasswort2, 0, SpringLayout.WEST, lblNachname);
 		panel_form.add(lblPasswort2);
 		
-		inp_password1 = new JTextField();
+		inp_password1 = new JPasswordField();
 		form_springLayout.putConstraint(SpringLayout.NORTH, inp_password1, -6, SpringLayout.NORTH, lblPasswort);
 		form_springLayout.putConstraint(SpringLayout.WEST, inp_password1, 34, SpringLayout.EAST, lblPasswort);
 		form_springLayout.putConstraint(SpringLayout.EAST, inp_password1, -6, SpringLayout.WEST, lblPasswort2);
