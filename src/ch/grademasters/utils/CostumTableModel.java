@@ -1,10 +1,11 @@
-package ch.grademasters.testarea;
-
+package ch.grademasters.utils;
 import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
+
+import ch.grademasters.actionlistener.JTableButtonListener;
 
 public class CostumTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
@@ -13,15 +14,14 @@ public class CostumTableModel extends AbstractTableModel {
     private final Vector<Object> COLUMN_TYPES;
     private final Vector<Vector> DATAS;
     private ArrayList<JButton> buttons;
-    private JTableStuff jTableStuff;
-    private ButtonListener buttonListener;
+
+    private JTableButtonListener buttonListener;
     
-	public CostumTableModel(Vector<Object> columnNames, Vector<Object> columnTypes, Vector<Vector> datas, JTableStuff jTableStuff) {
+	public CostumTableModel(Vector<Object> columnNames, Vector<Object> columnTypes, Vector<Vector> datas, JTableButtonListener buttonListener) {
 		this.COLUMN_NAMES = columnNames;
 		this.COLUMN_TYPES = columnTypes;
 		this.DATAS = datas;
-		this.jTableStuff = jTableStuff;
-		buttonListener = new ButtonListener(jTableStuff);
+		this.buttonListener = buttonListener;
 		
 		buttons = new ArrayList<JButton>();
 		for(Vector rows : DATAS){
@@ -32,23 +32,28 @@ public class CostumTableModel extends AbstractTableModel {
 		buttonListener.setButtons(buttons);
 	}
     
-    @Override public int getColumnCount() {
+    @Override 
+    public int getColumnCount() {
         return COLUMN_NAMES.size();
     }
 
-    @Override public int getRowCount() {
+    @Override 
+    public int getRowCount() {
         return DATAS.size();
     }
 
-    @Override public String getColumnName(int columnIndex) {
+    @Override 
+    public String getColumnName(int columnIndex) {
         return (String) COLUMN_NAMES.get(columnIndex);
     }
 
-    @Override public Class<?> getColumnClass(int columnIndex) {
+    @Override 
+    public Class<?> getColumnClass(int columnIndex) {
         return (Class<?>) COLUMN_TYPES.get(columnIndex);
     }
 
-    @Override public Object getValueAt(final int rowIndex, final int columnIndex) {
+    @Override 
+    public Object getValueAt(final int rowIndex, final int columnIndex) {
             /*Adding components*/
       	
     	if(COLUMN_TYPES.get(columnIndex) == JButton.class ){
@@ -57,5 +62,5 @@ public class CostumTableModel extends AbstractTableModel {
 //    		System.out.println((DATAS.get(rowIndex)).get(columnIndex));
     		return (DATAS.get(rowIndex)).get(columnIndex);
     	}
-    }   
+    }
 }

@@ -7,15 +7,22 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
+import ch.grademasters.actionlistener.JTableButtonMouseListener;
 import ch.grademasters.actionlistener.MainListener;
+import ch.grademasters.actionlistener.SemesterTableButtonListener;
+import ch.grademasters.model.Semester;
 import ch.grademasters.model.User;
+import ch.grademasters.utils.CostumTableModel;
+import ch.grademasters.utils.JTableButtonRenderer;
 
 public class Grademasters extends JFrame{
 
@@ -23,7 +30,7 @@ public class Grademasters extends JFrame{
 	
 	private User user;
 	private JPanel cards;
-	
+
 	private JPanel semesterCard;
 	private JPanel subjectCard;
 	private JPanel examCard;
@@ -35,7 +42,7 @@ public class Grademasters extends JFrame{
 	private MainListener actionListener;
 	
 	public Grademasters(User user) {
-		this.user = user;
+		this.setUser(user);
 		setTitle("GradeMasters");
 		setBounds(100, 100, 527, 461);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -134,8 +141,8 @@ public class Grademasters extends JFrame{
 		subjectCard.add(subjectCenterPanel, BorderLayout.CENTER);
 		subjectCenterPanel.setLayout(new BorderLayout(0, 0));
 		
-		subjectTable = new JTable();
-		subjectCenterPanel.add(subjectTable, BorderLayout.CENTER);
+		setSubjectTable(new JTable());
+		subjectCenterPanel.add(getSubjectTable(), BorderLayout.CENTER);
 		
 		JPanel subjectSouthPanle = new JPanel();
 		subjectCard.add(subjectSouthPanle, BorderLayout.SOUTH);
@@ -197,6 +204,67 @@ public class Grademasters extends JFrame{
 //	    cl.show(cards, "examCard");
 
 		setVisible(true);
+		createSemesterTableModel();
+	}
+	
+	public void createSemesterTableModel(){
+		Vector<Object> columnNames = new Vector<Object>();
+		columnNames.add("Name");
+		columnNames.add("Schule");
+		columnNames.add("Durchschnitt");
+		columnNames.add("Fächer");
+		
+		Vector<Object> columnTypes = new Vector<Object>();
+		columnTypes.add(String.class);
+		columnTypes.add(String.class);
+		columnTypes.add(Integer.class);
+		columnTypes.add(JButton.class);
+		
+		Vector<Vector> datas = new Vector<Vector>();
+		
+		if(user.getSemesters() != null){
+			for(Semester semester : user.getSemesters()){
+				Vector<Object> row = new Vector<Object>();
+				row.add(semester.getName());
+				row.add(semester.getSchool());
+				row.add(1);
+				row.add("->");
+	
+				datas.add(row);
+			}
+		}
+				
+		semesterTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new SemesterTableButtonListener(this)));		
+		semesterTable.setEnabled(false);
+		if(user.getSemesters() != null){
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			semesterTable.getColumn("Fächer").setCellRenderer(buttonRenderer);
+			semesterTable.addMouseListener(new JTableButtonMouseListener(semesterTable));
+		}
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public JTable getSubjectTable() {
+		return subjectTable;
+	}
+
+	public void setSubjectTable(JTable subjectTable) {
+		this.subjectTable = subjectTable;
+	}
+	
+	public JPanel getCards() {
+		return cards;
+	}
+
+	public void setCards(JPanel cards) {
+		this.cards = cards;
 	}
 
 }
