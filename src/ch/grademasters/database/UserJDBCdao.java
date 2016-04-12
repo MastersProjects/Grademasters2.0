@@ -1,6 +1,7 @@
 package ch.grademasters.database;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserJDBCdao extends Database{
 	
@@ -42,6 +43,26 @@ public class UserJDBCdao extends Database{
 			closeCon();
 		}
 		return password;		
+	}
+
+	public ArrayList<String> getAllUser() {
+		openCon();
+		ArrayList<String> users = new ArrayList<String>();
+		try {
+			ps = con.prepareStatement("SELECT * FROM USER");			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {			 
+			      users.add(rs.getString("Username"));
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally{
+			closeCon();
+		}
+		return users;
+	
 	}
 
 }

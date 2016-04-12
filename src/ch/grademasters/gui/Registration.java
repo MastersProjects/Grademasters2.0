@@ -169,4 +169,29 @@ public class Registration extends JFrame {
 		setVisible(true);
 	}
 
+	public String getInp_email() {
+		return inp_email.getText();
+	}
+
+	public String getInp_username() {
+		return inp_username.getText();
+	}
+
+	public String getInp_lastname() {
+		return inp_lastname.getText();
+	}
+
+	public String getInp_firstname() {
+		return inp_firstname.getText();
+	}
+
+	public String getInp_password1() {
+		MD5 md5decoder = new MD5();
+		return md5decoder.getMD5(inp_password1.getText());
+	}
+
+	public String getInp_password2() {
+		MD5 md5decoder = new MD5();
+		return md5decoder.getMD5(inp_password2.getText());
+	}
 }

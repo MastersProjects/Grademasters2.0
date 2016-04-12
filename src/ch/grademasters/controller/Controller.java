@@ -28,8 +28,8 @@ public class Controller {
 		return instance;
 	}
 	
-	public void registerUser(String username, String firstname, String lastname, String email, String password){
-		//TODO Register Validation
+	public void registerUser(String username, String firstname, String lastname, String email, String password, String password2){
+	
 		USER_JDBC.registerUser(username, firstname, lastname, email, password);
 	}
 	
@@ -71,6 +71,10 @@ public class Controller {
 	
 	public void createExam(String name, Double grade, Date date, Boolean count, int subject_id){
 		EXAM_JDBC.createExam(name, grade, date, count, subject_id);
+	}
+
+	public ArrayList<String> getAllUser() {
+		return USER_JDBC.getAllUser();
 	}
 	
 	
