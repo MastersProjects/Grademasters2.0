@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -20,10 +21,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import ch.grademasters.actionlistener.BackButtonListener;
+import ch.grademasters.actionlistener.ExamTableButtonListener;
 import ch.grademasters.actionlistener.JTableButtonMouseListener;
 import ch.grademasters.actionlistener.MainListener;
 import ch.grademasters.actionlistener.SemesterTableButtonListener;
+import ch.grademasters.actionlistener.SubjectTableButtonListener;
+import ch.grademasters.model.Exam;
 import ch.grademasters.model.Semester;
+import ch.grademasters.model.Subject;
 import ch.grademasters.model.User;
 import ch.grademasters.utils.CostumTableModel;
 import ch.grademasters.utils.JTableButtonRenderer;
@@ -36,6 +41,8 @@ public class Grademasters extends JFrame{
 	private User user;
 	private int selectedSemesterID;
 	private int selectedSubjectID;
+	private int subjectIterator;
+	private int examIterator;
 	
 	private JPanel cards;
 
@@ -58,6 +65,8 @@ public class Grademasters extends JFrame{
 		cards = new JPanel();
 		getContentPane().add(cards);
 		cards.setLayout(new CardLayout(20, 0));
+		
+		actionListener = new MainListener(this);
 		
 		
 		/*
@@ -86,6 +95,7 @@ public class Grademasters extends JFrame{
 		semesterNorthPanel.add(semesterLabel, gbc_semesterLabel);
 		
 		JButton semesterAddButton = new JButton("Semester hinzuf\u00FCgen");
+		semesterAddButton.addActionListener(actionListener);
 		GridBagConstraints gbc_semesterAddButton = new GridBagConstraints();
 		gbc_semesterAddButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_semesterAddButton.insets = new Insets(0, 0, 5, 0);
@@ -116,12 +126,7 @@ public class Grademasters extends JFrame{
 		JButton semesterLogoutButton = new JButton("Abmelden");
 		semesterSouthPanel.add(semesterLogoutButton);
 		semesterLogoutButton.addActionListener(new BackButtonListener(cards, "Abmelden"));
-		
-		//ActionListener
-		//TODO Change to AddListener
-		actionListener = new MainListener(this);
-		semesterAddButton.addActionListener(actionListener);
-		semesterLogoutButton.addActionListener(actionListener);
+			
 		
 		/*
 		 * Subject Card
@@ -149,6 +154,7 @@ public class Grademasters extends JFrame{
 		subjectNorthPanel.add(subjectLabel, gbc_subjectLabel);
 		
 		JButton subjectAddButton = new JButton("Fach hinzuf\u00FCgen");
+		subjectAddButton.addActionListener(actionListener);
 		GridBagConstraints gbc_subjectAddButton = new GridBagConstraints();
 		gbc_subjectAddButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_subjectAddButton.insets = new Insets(0, 0, 5, 0);
@@ -207,6 +213,7 @@ public class Grademasters extends JFrame{
 		examNorthPanel.add(examLabel, gbc_examLabel);
 		
 		JButton examAddButton = new JButton("Pr\u00FCfung hinzuf\u00FCgen");
+		examAddButton.addActionListener(actionListener);
 		GridBagConstraints gbc_examAddButton = new GridBagConstraints();
 		gbc_examAddButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_examAddButton.insets = new Insets(0, 0, 5, 0);
@@ -284,6 +291,91 @@ public class Grademasters extends JFrame{
 		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 		semesterTable.getColumnModel().getColumn(2).setCellRenderer(tableRenderer);
 	}
+	
+	public void createSubjectTableModel(int iterator){
+		this.subjectIterator = iterator;
+		this.selectedSemesterID = user.getSemesters().get(iterator).getId();
+		Vector<Object> columnNames = new Vector<Object>();
+		columnNames.add("Fach");
+		columnNames.add("Durchschnitt");
+		columnNames.add("Prüfungen");
+		
+		Vector<Object> columnTypes = new Vector<Object>();
+		columnTypes.add(String.class);
+		columnTypes.add(Integer.class);
+		columnTypes.add(JButton.class);
+		
+		@SuppressWarnings("rawtypes")
+		Vector<Vector> datas = new Vector<Vector>();
+		
+		if(user.getSemesters().get(iterator).getSubjects() != null){
+			for(Subject subject : user.getSemesters().get(iterator).getSubjects()){
+				Vector<Object> row = new Vector<Object>();
+				row.add(subject.getName());
+				row.add(1);
+				row.add("->");
+	
+				datas.add(row);
+			}
+		}
+				
+		subjectTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new SubjectTableButtonListener(this, user.getSemesters().get(iterator).getSubjects())));		
+		subjectTable.setEnabled(false);		
+		if(user.getSemesters().get(iterator).getSubjects() != null){
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			subjectTable.getColumn("Prüfungen").setCellRenderer(buttonRenderer);
+			subjectTable.addMouseListener(new JTableButtonMouseListener(subjectTable));	
+		}
+		
+		//Allignement Center
+		DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
+		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		subjectTable.getColumnModel().getColumn(1).setCellRenderer(tableRenderer);
+	}
+	
+	public void createExamTableModel(int iterator, ArrayList<Subject> subjects){
+		this.examIterator = iterator;
+		this.selectedSubjectID = subjects.get(iterator).getId();
+		Vector<Object> columnNames = new Vector<Object>();
+		columnNames.add("Name");
+		columnNames.add("Datum");
+		columnNames.add("Durchschnitt");
+		columnNames.add("Prüfungen");
+		
+		Vector<Object> columnTypes = new Vector<Object>();
+		columnTypes.add(String.class);
+		columnTypes.add(String.class);
+		columnTypes.add(Integer.class);
+		columnTypes.add(JButton.class);
+		
+		@SuppressWarnings("rawtypes")
+		Vector<Vector> datas = new Vector<Vector>();
+		
+		if(subjects.get(iterator).getExams() != null ){
+			for(Exam exam : subjects.get(iterator).getExams()){
+				Vector<Object> row = new Vector<Object>();
+				row.add(exam.getName());
+				row.add(1);
+				row.add("->");
+	
+				datas.add(row);
+			}
+		}
+				
+		subjectTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new ExamTableButtonListener(this, subjects.get(iterator).getExams())));		
+		subjectTable.setEnabled(false);
+		
+		if(subjects.get(iterator).getExams() != null){
+			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
+			subjectTable.getColumn("Prüfungen").setCellRenderer(buttonRenderer);
+			subjectTable.addMouseListener(new JTableButtonMouseListener(subjectTable));
+		}
+		
+		//Allignement Center
+		DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
+		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		subjectTable.getColumnModel().getColumn(2).setCellRenderer(tableRenderer);
+	}
 
 	public User getUser() {
 		return user;
@@ -323,6 +415,22 @@ public class Grademasters extends JFrame{
 
 	public void setSelectedSubjectID(int selectedSubjectID) {
 		this.selectedSubjectID = selectedSubjectID;
+	}
+
+	public int getSubjectIterator() {
+		return subjectIterator;
+	}
+
+	public void setSubjectIterator(int subjectIterator) {
+		this.subjectIterator = subjectIterator;
+	}
+
+	public int getExamIterator() {
+		return examIterator;
+	}
+
+	public void setExamIterator(int examIterator) {
+		this.examIterator = examIterator;
 	}
 
 }

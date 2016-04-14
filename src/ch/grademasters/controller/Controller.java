@@ -65,8 +65,8 @@ public class Controller {
 		SEMESTER_JDBC.createSemester(name, school, username);
 	}
 	
-	public void createSubject(String name, String school, int subject_id){
-		SUBJECT_JDBC.createSubject(name, school, subject_id);
+	public void createSubject(String name, int subject_id){
+		SUBJECT_JDBC.createSubject(name, subject_id);
 	}
 	
 	public void createExam(String name, Double grade, Date date, Boolean count, int subject_id){

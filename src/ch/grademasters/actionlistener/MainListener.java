@@ -3,35 +3,30 @@ package ch.grademasters.actionlistener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import ch.grademasters.gui.AddExam;
+import ch.grademasters.gui.AddSemester;
+import ch.grademasters.gui.AddSubject;
+import ch.grademasters.gui.Grademasters;
 
-//TODO Change to AddListener
 public class MainListener implements ActionListener{
-	private JButton button;
-	private JFrame frame;
+	private Grademasters grademasters;
 	
-	public MainListener(JFrame frame) {
-		this.setFrame(frame);
+	public MainListener(Grademasters grademasters) {
+		this.grademasters = grademasters;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		button = (JButton) e.getSource();
-		if(button.getText().equals("Semester hinzufügen")){
-			
-			System.out.println("semester hinzufügen");
-		} else if (button.getText().equals("Abmelden")){
-			
+		String buttonText = e.getActionCommand();
+		if(buttonText.equals("Semester hinzufügen")){
+			grademasters.setEnabled(false);
+			new AddSemester(grademasters);
+		} else if (buttonText.equals("Fach hinzufügen")){
+			new AddSubject(grademasters);
+		} else if (buttonText.equals("Note hinzufügen")){
+			new AddExam(grademasters);
 		}
 	}
 
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-	}
 	
 }

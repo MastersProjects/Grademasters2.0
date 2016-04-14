@@ -16,15 +16,14 @@ import ch.grademasters.model.Subject;
  */
 public class SubjectJDBCdao extends Database{
 
-	public void createSubject(String name, String school, int semester_id){
+	public void createSubject(String name, int semester_id){
 		openCon();
 		try{
-			ps = con.prepareStatement("INSERT INTO SUBJECT VALUES(?,?,?,?);");
+			ps = con.prepareStatement("INSERT INTO SUBJECT VALUES(?,?,?);");
 			
 			ps.setString(1, null);
 			ps.setString(2, name);
-			ps.setString(3, school);
-			ps.setInt(4, semester_id);
+			ps.setInt(3, semester_id);
 			
 			ps.executeUpdate();
 		} catch (SQLException e){

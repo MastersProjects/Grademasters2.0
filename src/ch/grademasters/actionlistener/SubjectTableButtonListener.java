@@ -26,45 +26,7 @@ public class SubjectTableButtonListener extends JTableButtonListener {
 
 	@Override
 	public void createTableModel(int iterator) {
-		Vector<Object> columnNames = new Vector<Object>();
-		columnNames.add("Name");
-		columnNames.add("Datum");
-		columnNames.add("Durchschnitt");
-		columnNames.add("Prüfung");
-		
-		Vector<Object> columnTypes = new Vector<Object>();
-		columnTypes.add(String.class);
-		columnTypes.add(String.class);
-		columnTypes.add(Integer.class);
-		columnTypes.add(JButton.class);
-		
-		@SuppressWarnings("rawtypes")
-		Vector<Vector> datas = new Vector<Vector>();
-		
-		if(subjects.get(iterator).getExams() != null){
-			for(Exam exam : subjects.get(iterator).getExams()){
-				Vector<Object> row = new Vector<Object>();
-				row.add(exam.getName());
-				row.add(1);
-				row.add("->");
-	
-				datas.add(row);
-			}
-		}
-				
-		getGrademasters().getSubjectTable().setModel(new CostumTableModel(columnNames, columnTypes, datas, new ExamTableButtonListener(getGrademasters(), subjects.get(iterator).getExams())));		
-		getGrademasters().getSubjectTable().setEnabled(false);
-		
-		if(subjects.get(iterator).getExams() != null){
-			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			getGrademasters().getSubjectTable().getColumn("Prüfungen").setCellRenderer(buttonRenderer);
-			getGrademasters().getSubjectTable().addMouseListener(new JTableButtonMouseListener(getGrademasters().getSubjectTable()));
-		}
-		
-		//Allignement Center
-		DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
-		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		getGrademasters().getSubjectTable().getColumnModel().getColumn(2).setCellRenderer(tableRenderer);
+		getGrademasters().createExamTableModel(iterator, subjects);
 		
 		CardLayout cl = (CardLayout)(getGrademasters().getCards().getLayout());
 	    cl.show(getGrademasters().getCards(), "examCard");	
