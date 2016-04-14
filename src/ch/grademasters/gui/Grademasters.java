@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
+import ch.grademasters.actionlistener.BackButtonListener;
 import ch.grademasters.actionlistener.JTableButtonMouseListener;
 import ch.grademasters.actionlistener.MainListener;
 import ch.grademasters.actionlistener.SemesterTableButtonListener;
@@ -98,6 +99,7 @@ public class Grademasters extends JFrame{
 		
 		JButton semesterLogoutButton = new JButton("Abmelden");
 		semesterSouthPanel.add(semesterLogoutButton);
+		semesterLogoutButton.addActionListener(new BackButtonListener(cards, "Abmelden"));
 		
 		//ActionListener
 			actionListener = new MainListener(this);
@@ -150,6 +152,7 @@ public class Grademasters extends JFrame{
 		
 		JButton subjectBackButton = new JButton("Zur\u00FCck");
 		subjectSouthPanle.add(subjectBackButton);
+		subjectBackButton.addActionListener(new BackButtonListener(cards, "semesterCard"));
 		
 		
 		/*
@@ -198,6 +201,7 @@ public class Grademasters extends JFrame{
 		
 		JButton examBackButton = new JButton("Zur\u00FCck");
 		examSouthPanel.add(examBackButton);
+		examBackButton.addActionListener(new BackButtonListener(cards, "subjectCard"));
 		
 		//DisplayCard
 //		CardLayout cl = (CardLayout)(cards.getLayout());

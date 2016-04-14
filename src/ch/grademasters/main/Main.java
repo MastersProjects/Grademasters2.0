@@ -13,8 +13,9 @@ import ch.grademasters.model.User;
 public class Main {
 
 	public static void main(String[] args) {
-		new Registration();
-//		new Login();
+		new Login();
+//		new Registration();
+
 //		UserJDBCdao data = new UserJDBCdao();
 //		data.registerUser("Phong6698", "Phong", "Penglerd", "Phong@hotmail.ch", "1234");
 //		System.out.println(data.loginUser("Phong6698"));
@@ -78,7 +79,7 @@ public class Main {
 		user.setSemesters(semesters);
 		user.setUsername("HansNötig");
 		
-//		new Grademasters(user);
+		new Grademasters(user);
 		
 //		new Grademasters(Controller.getInstance().getUserInfos("TEst"));
 
