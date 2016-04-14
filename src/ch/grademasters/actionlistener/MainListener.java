@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+//TODO Change to AddListener
 public class MainListener implements ActionListener{
 	private JButton button;
 	private JFrame frame;
@@ -18,10 +19,10 @@ public class MainListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		button = (JButton) e.getSource();
 		if(button.getText().equals("Semester hinzufügen")){
-			//ToDo
+			
 			System.out.println("semester hinzufügen");
 		} else if (button.getText().equals("Abmelden")){
-			//ToDo
+			
 		}
 	}
 

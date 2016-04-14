@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import ch.grademasters.gui.Grademasters;
@@ -50,6 +52,11 @@ public class SemesterTableButtonListener extends JTableButtonListener{
 			getGrademasters().getSubjectTable().getColumn("Prüfungen").setCellRenderer(buttonRenderer);
 			getGrademasters().getSubjectTable().addMouseListener(new JTableButtonMouseListener(getGrademasters().getSubjectTable()));	
 		}
+		
+		//Allignement Center
+		DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
+		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		getGrademasters().getSubjectTable().getColumnModel().getColumn(1).setCellRenderer(tableRenderer);
 		
 		CardLayout cl = (CardLayout)(getGrademasters().getCards().getLayout());
 	    cl.show(getGrademasters().getCards(), "subjectCard");		

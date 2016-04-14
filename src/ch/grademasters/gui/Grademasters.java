@@ -2,6 +2,7 @@ package ch.grademasters.gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -14,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 import ch.grademasters.actionlistener.BackButtonListener;
@@ -24,12 +27,16 @@ import ch.grademasters.model.Semester;
 import ch.grademasters.model.User;
 import ch.grademasters.utils.CostumTableModel;
 import ch.grademasters.utils.JTableButtonRenderer;
+import javax.swing.JScrollPane;
 
 public class Grademasters extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	
 	private User user;
+	private int selectedSemesterID;
+	private int selectedSubjectID;
+	
 	private JPanel cards;
 
 	private JPanel semesterCard;
@@ -90,8 +97,17 @@ public class Grademasters extends JFrame{
 		semesterCard.add(semesterCenterPanel, BorderLayout.CENTER);
 		semesterCenterPanel.setLayout(new BorderLayout(0, 0));
 		
+		JScrollPane semesterScrollPane = new JScrollPane();
+		semesterCenterPanel.add(semesterScrollPane, BorderLayout.CENTER);
+		
 		semesterTable = new JTable();
-		semesterCenterPanel.add(semesterTable);
+		//Design Stuff
+		semesterTable.setShowVerticalLines(false);
+		semesterTable.setRowHeight(40);
+		semesterTable.setShowHorizontalLines(false);
+		semesterTable.setIntercellSpacing(new Dimension(30,10));
+		
+		semesterScrollPane.setViewportView(semesterTable);
 		
 		JPanel semesterSouthPanel = new JPanel();
 		semesterCard.add(semesterSouthPanel, BorderLayout.SOUTH);
@@ -102,9 +118,10 @@ public class Grademasters extends JFrame{
 		semesterLogoutButton.addActionListener(new BackButtonListener(cards, "Abmelden"));
 		
 		//ActionListener
-			actionListener = new MainListener(this);
-			semesterAddButton.addActionListener(actionListener);
-			semesterLogoutButton.addActionListener(actionListener);
+		//TODO Change to AddListener
+		actionListener = new MainListener(this);
+		semesterAddButton.addActionListener(actionListener);
+		semesterLogoutButton.addActionListener(actionListener);
 		
 		/*
 		 * Subject Card
@@ -143,8 +160,17 @@ public class Grademasters extends JFrame{
 		subjectCard.add(subjectCenterPanel, BorderLayout.CENTER);
 		subjectCenterPanel.setLayout(new BorderLayout(0, 0));
 		
+		JScrollPane subjectScrollPane = new JScrollPane();
+		subjectCenterPanel.add(subjectScrollPane, BorderLayout.CENTER);
+		
 		setSubjectTable(new JTable());
-		subjectCenterPanel.add(getSubjectTable(), BorderLayout.CENTER);
+		//Design Stuff
+		getSubjectTable().setShowVerticalLines(false);
+		getSubjectTable().setRowHeight(40);
+		getSubjectTable().setShowHorizontalLines(false);
+		getSubjectTable().setIntercellSpacing(new Dimension(30,10));
+		
+		subjectScrollPane.setViewportView(getSubjectTable());
 		
 		JPanel subjectSouthPanle = new JPanel();
 		subjectCard.add(subjectSouthPanle, BorderLayout.SOUTH);
@@ -192,8 +218,17 @@ public class Grademasters extends JFrame{
 		examCard.add(examCenterPanel, BorderLayout.CENTER);
 		examCenterPanel.setLayout(new BorderLayout(0, 0));
 		
+		JScrollPane examScrollPane = new JScrollPane();
+		examCenterPanel.add(examScrollPane, BorderLayout.CENTER);
+		
 		examTable = new JTable();
-		examCenterPanel.add(examTable, BorderLayout.CENTER);
+		//Design Stuff
+		examTable.setShowVerticalLines(false);
+		examTable.setRowHeight(40);
+		examTable.setShowHorizontalLines(false);
+		examTable.setIntercellSpacing(new Dimension(30,10));
+		
+		examScrollPane.setViewportView(examTable);
 		
 		JPanel examSouthPanel = new JPanel();
 		examCard.add(examSouthPanel, BorderLayout.SOUTH);
@@ -202,13 +237,10 @@ public class Grademasters extends JFrame{
 		JButton examBackButton = new JButton("Zur\u00FCck");
 		examSouthPanel.add(examBackButton);
 		examBackButton.addActionListener(new BackButtonListener(cards, "subjectCard"));
-		
-		//DisplayCard
-//		CardLayout cl = (CardLayout)(cards.getLayout());
-//	    cl.show(cards, "examCard");
 
-		setVisible(true);
 		createSemesterTableModel();
+		
+		setVisible(true);	
 	}
 	
 	public void createSemesterTableModel(){
@@ -246,6 +278,11 @@ public class Grademasters extends JFrame{
 			semesterTable.getColumn("Fächer").setCellRenderer(buttonRenderer);
 			semesterTable.addMouseListener(new JTableButtonMouseListener(semesterTable));
 		}
+		
+		//Allignement Center
+		DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
+		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		semesterTable.getColumnModel().getColumn(2).setCellRenderer(tableRenderer);
 	}
 
 	public User getUser() {
@@ -270,6 +307,22 @@ public class Grademasters extends JFrame{
 
 	public void setCards(JPanel cards) {
 		this.cards = cards;
+	}
+
+	public int getSelectedSemesterID() {
+		return selectedSemesterID;
+	}
+
+	public void setSelectedSemesterID(int selectedSemesterID) {
+		this.selectedSemesterID = selectedSemesterID;
+	}
+
+	public int getSelectedSubjectID() {
+		return selectedSubjectID;
+	}
+
+	public void setSelectedSubjectID(int selectedSubjectID) {
+		this.selectedSubjectID = selectedSubjectID;
 	}
 
 }
