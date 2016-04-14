@@ -35,6 +35,7 @@ public class AddExam extends JFrame{
 		this.grademasters = grademasters;
 		setTitle("GradeMasters - Note hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 347);
+		setLocationRelativeTo(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

@@ -31,6 +31,7 @@ public class AddSemester extends JFrame{
 		
 		setTitle("GradeMasters - Semester hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 210);
+		setLocationRelativeTo(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};

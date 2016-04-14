@@ -60,6 +60,7 @@ public class Grademasters extends JFrame{
 		this.setUser(user);
 		setTitle("GradeMasters");
 		setBounds(100, 100, 527, 461);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		cards = new JPanel();

@@ -55,6 +55,7 @@ public class Registration extends JFrame {
 		//Jpanel Settings
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 426, 266);
+		setLocationRelativeTo(null);
 		
 		//Set Panels
 		contentPane = new JPanel();

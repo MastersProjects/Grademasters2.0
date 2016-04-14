@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import ch.grademasters.controller.Controller;
 import ch.grademasters.gui.Grademasters;
 import ch.grademasters.gui.Login;
+import ch.grademasters.gui.Registration;
 
 public class LoginListener implements ActionListener {
 	
@@ -29,13 +30,14 @@ public class LoginListener implements ActionListener {
 			
 			System.out.println(password);
 			if(Controller.getInstance().loginUser(username, password)==true){
-				//System.out.println("true login");
 				new Grademasters(Controller.getInstance().getUserInfos(username));
+				frame.dispose();
 			} else {
 				JOptionPane.showMessageDialog(null, "Username und Password stimmen nicht \u00fcberein", "Login fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
 			} 
 		} else if (button.getText().equals("Registrieren")){
-//			new Registration();
+			new Registration();
+			frame.dispose();
 		} else if (button.getText().equals("Abbrechen")){
 			System.exit(0);
 		}

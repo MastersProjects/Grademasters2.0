@@ -29,6 +29,7 @@ public class AddSubject extends JFrame{
 		
 		setTitle("GradeMasters - Fach hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 169);
+		setLocationRelativeTo(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};

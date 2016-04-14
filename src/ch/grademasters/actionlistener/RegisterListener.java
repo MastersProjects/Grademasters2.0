@@ -59,7 +59,8 @@ public class RegisterListener implements ActionListener {
 				new Login();
 			}
 		} else if (button.getText().equals("Abbrechen")) {
-			System.exit(0);
+			new Login();
+			frame.dispose();
 		}
 	}
 
