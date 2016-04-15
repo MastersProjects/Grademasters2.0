@@ -261,7 +261,7 @@ public class Grademasters extends JFrame{
 		Vector<Object> columnTypes = new Vector<Object>();
 		columnTypes.add(String.class);
 		columnTypes.add(String.class);
-		columnTypes.add(Integer.class);
+		columnTypes.add(Double.class);
 		columnTypes.add(JButton.class);
 		
 		@SuppressWarnings("rawtypes")
@@ -303,7 +303,7 @@ public class Grademasters extends JFrame{
 		
 		Vector<Object> columnTypes = new Vector<Object>();
 		columnTypes.add(String.class);
-		columnTypes.add(Integer.class);
+		columnTypes.add(Double.class);
 		columnTypes.add(JButton.class);
 		
 		@SuppressWarnings("rawtypes")
@@ -346,7 +346,7 @@ public class Grademasters extends JFrame{
 		Vector<Object> columnTypes = new Vector<Object>();
 		columnTypes.add(String.class);
 		columnTypes.add(String.class);
-		columnTypes.add(Integer.class);
+		columnTypes.add(Double.class);
 		columnTypes.add(JButton.class);
 		
 		@SuppressWarnings("rawtypes")
@@ -357,25 +357,26 @@ public class Grademasters extends JFrame{
 				Vector<Object> row = new Vector<Object>();
 				row.add(exam.getName());
 				row.add(1);
+				row.add(exam.getGrade());
 				row.add("->");
 	
 				datas.add(row);
 			}
 		}
 				
-		subjectTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new ExamTableButtonListener(this, subjects.get(iterator).getExams())));		
-		subjectTable.setEnabled(false);
+		examTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new ExamTableButtonListener(this, subjects.get(iterator).getExams())));		
+		examTable.setEnabled(false);
 		
 		if(subjects.get(iterator).getExams() != null){
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			subjectTable.getColumn("Prüfungen").setCellRenderer(buttonRenderer);
-			subjectTable.addMouseListener(new JTableButtonMouseListener(subjectTable));
+			examTable.getColumn("Prüfungen").setCellRenderer(buttonRenderer);
+			examTable.addMouseListener(new JTableButtonMouseListener(examTable));
 		}
 		
 		//Allignement Center
 		DefaultTableCellRenderer tableRenderer = new DefaultTableCellRenderer();
 		tableRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		subjectTable.getColumnModel().getColumn(2).setCellRenderer(tableRenderer);
+		examTable.getColumnModel().getColumn(2).setCellRenderer(tableRenderer);
 	}
 
 	public User getUser() {
