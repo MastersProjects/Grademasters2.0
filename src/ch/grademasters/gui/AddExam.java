@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.SqlDateModel;
-import org.jdatepicker.impl.UtilDateModel;
 
 import ch.grademasters.actionlistener.AddExamListener;
 import ch.grademasters.actionlistener.WindowClosingListener;
@@ -36,7 +35,7 @@ public class AddExam extends JFrame{
 	private JDatePickerImpl datePicker;
 	
 	public AddExam(Grademasters grademasters) {
-		this.grademasters = grademasters;
+		this.setGrademasters(grademasters);
 		setTitle("GradeMasters - Prüfung hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 347);
 		setLocationRelativeTo(null);
@@ -90,7 +89,6 @@ public class AddExam extends JFrame{
 		gbc_datum.gridx = 3;
 		gbc_datum.gridy = 3;
 		getContentPane().add(datePicker, gbc_datum);
-//		datePicker.setColumns(10);
 		
 		JLabel lblNote = new JLabel("Note");
 		lblNote.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -181,6 +179,14 @@ public class AddExam extends JFrame{
 
 	public void setDatePicker(JDatePickerImpl datePicker) {
 		this.datePicker = datePicker;
+	}
+
+	public Grademasters getGrademasters() {
+		return grademasters;
+	}
+
+	public void setGrademasters(Grademasters grademasters) {
+		this.grademasters = grademasters;
 	}
 
 	

@@ -123,6 +123,7 @@ public class Login extends JFrame {
 		return inp_username.getText();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getInp_password() {
 		MD5 md5decoder = new MD5();
 		return md5decoder.getMD5(inp_password.getText());

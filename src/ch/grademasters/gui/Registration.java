@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
-import ch.grademasters.actionlistener.LoginListener;
 import ch.grademasters.actionlistener.RegisterListener;
 import ch.grademasters.utils.MD5;
 
@@ -187,11 +186,13 @@ public class Registration extends JFrame {
 		return inp_firstname.getText();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getInp_password1() {
 		MD5 md5decoder = new MD5();
 		return md5decoder.getMD5(inp_password1.getText());
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getInp_password2() {
 		MD5 md5decoder = new MD5();
 		return md5decoder.getMD5(inp_password2.getText());

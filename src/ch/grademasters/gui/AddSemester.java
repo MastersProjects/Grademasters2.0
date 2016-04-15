@@ -27,7 +27,7 @@ public class AddSemester extends JFrame{
 	
 	public AddSemester(Grademasters grademasters) {
 		
-		this.grademasters = grademasters;
+		this.setGrademasters(grademasters);
 		
 		setTitle("GradeMasters - Semester hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 210);
@@ -114,6 +114,14 @@ public class AddSemester extends JFrame{
 
 	public void setSchule(JTextField schule) {
 		this.schule = schule;
+	}
+
+	public Grademasters getGrademasters() {
+		return grademasters;
+	}
+
+	public void setGrademasters(Grademasters grademasters) {
+		this.grademasters = grademasters;
 	}
 
 	

@@ -12,19 +12,21 @@ public class CostumTableModel extends AbstractTableModel {
     
     private final Vector<Object> COLUMN_NAMES;
     private final Vector<Object> COLUMN_TYPES;
-    private final Vector<Vector> DATAS;
+    @SuppressWarnings("rawtypes")
+	private final Vector<Vector> DATAS;
     private ArrayList<JButton> buttons;
 
     private JTableButtonListener buttonListener;
     
-	public CostumTableModel(Vector<Object> columnNames, Vector<Object> columnTypes, Vector<Vector> datas, JTableButtonListener buttonListener) {
+	@SuppressWarnings("unchecked")
+	public CostumTableModel(Vector<Object> columnNames, Vector<Object> columnTypes, @SuppressWarnings("rawtypes") Vector<Vector> datas, JTableButtonListener buttonListener) {
 		this.COLUMN_NAMES = columnNames;
 		this.COLUMN_TYPES = columnTypes;
 		this.DATAS = datas;
-		this.buttonListener = buttonListener;
+		this.setButtonListener(buttonListener);
 		
 		buttons = new ArrayList<JButton>();
-		for(Vector rows : DATAS){
+		for(Vector<String> rows : DATAS){
 			JButton button = new JButton((String)rows.get(rows.size()-1));
 			button.addActionListener(buttonListener);
 			buttons.add(button);
@@ -63,4 +65,12 @@ public class CostumTableModel extends AbstractTableModel {
     		return (DATAS.get(rowIndex)).get(columnIndex);
     	}
     }
+
+	public JTableButtonListener getButtonListener() {
+		return buttonListener;
+	}
+
+	public void setButtonListener(JTableButtonListener buttonListener) {
+		this.buttonListener = buttonListener;
+	}
 }

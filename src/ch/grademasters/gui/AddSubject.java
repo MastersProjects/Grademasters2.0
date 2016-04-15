@@ -25,7 +25,7 @@ public class AddSubject extends JFrame{
 	private JTextField bezeichnung;
 	
 	public AddSubject(Grademasters grademasters) {
-		this.grademasters = grademasters;
+		this.setGrademasters(grademasters);
 		
 		setTitle("GradeMasters - Fach hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 169);
@@ -85,6 +85,14 @@ public class AddSubject extends JFrame{
 
 	public void setBezeichnung(JTextField bezeichnung) {
 		this.bezeichnung = bezeichnung;
+	}
+
+	public Grademasters getGrademasters() {
+		return grademasters;
+	}
+
+	public void setGrademasters(Grademasters grademasters) {
+		this.grademasters = grademasters;
 	}
 
 	
