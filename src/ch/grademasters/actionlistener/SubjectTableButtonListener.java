@@ -17,16 +17,14 @@ import ch.grademasters.utils.JTableButtonRenderer;
 
 public class SubjectTableButtonListener extends JTableButtonListener {
 	
-	ArrayList<Subject> subjects;
 	
-	public SubjectTableButtonListener(Grademasters grademasters, ArrayList<Subject> subjects) {
+	public SubjectTableButtonListener(Grademasters grademasters) {
 		super(grademasters);
-		this.subjects = subjects;
 	}
 
 	@Override
 	public void createTableModel(int iterator) {
-		getGrademasters().createExamTableModel(iterator, subjects);
+		getGrademasters().createExamTableModel(iterator);
 		
 		CardLayout cl = (CardLayout)(getGrademasters().getCards().getLayout());
 	    cl.show(getGrademasters().getCards(), "examCard");	

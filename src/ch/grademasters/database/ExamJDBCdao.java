@@ -23,10 +23,11 @@ public class ExamJDBCdao extends Database {
 			ps = con.prepareStatement("INSERT INTO EXAM VALUES (?,?,?,?,?,?);");
 
 			ps.setString(1, null);
-			ps.setDouble(2, grade);
-			ps.setDate(3, date);
-			ps.setBoolean(4, count);
-			ps.setInt(5, subject_id);
+			ps.setString(2, name);
+			ps.setDouble(3, grade);
+			ps.setDate(4, date);
+			ps.setBoolean(5, count);
+			ps.setInt(6, subject_id);
 
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -49,7 +50,7 @@ public class ExamJDBCdao extends Database {
 				exam.setId(rs.getInt("ID_Exam"));
 				exam.setName(rs.getString("Name"));
 				exam.setGrade(rs.getFloat("Grade"));
-				//TODO Date
+				exam.setDate(rs.getDate("Date"));
 				exam.setCount(rs.getBoolean("Grade"));
 				
 				exams.add(exam);

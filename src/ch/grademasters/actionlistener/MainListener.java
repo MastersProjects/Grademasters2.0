@@ -23,7 +23,7 @@ public class MainListener implements ActionListener{
 			new AddSemester(grademasters);
 		} else if (buttonText.equals("Fach hinzufügen")){
 			new AddSubject(grademasters);
-		} else if (buttonText.equals("Note hinzufügen")){
+		} else if (buttonText.equals("Prüfung hinzufügen")){
 			new AddExam(grademasters);
 		}
 	}

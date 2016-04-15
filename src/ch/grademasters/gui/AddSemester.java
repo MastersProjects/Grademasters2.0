@@ -86,7 +86,7 @@ public class AddSemester extends JFrame{
 		gbc_abbrechenButton.gridy = 5;
 		getContentPane().add(abbrechenButton, gbc_abbrechenButton);
 		
-		JButton hinzufügenButton = new JButton("Hinzuf\u00FCgen");
+		JButton hinzufügenButton = new JButton("Hinzufügen");
 		hinzufügenButton.addActionListener(new AddSemesterListener(grademasters, this));
 		GridBagConstraints gbc_hinzufügenButton = new GridBagConstraints();
 		gbc_hinzufügenButton.anchor = GridBagConstraints.EAST;

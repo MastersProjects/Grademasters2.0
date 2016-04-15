@@ -1,22 +1,25 @@
 package ch.grademasters.gui;
 
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.Properties;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import ch.grademasters.actionlistener.WindowClosingListener;
-
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JCheckBox;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
+import org.jdatepicker.impl.UtilDateModel;
+
+import ch.grademasters.actionlistener.AddExamListener;
+import ch.grademasters.actionlistener.WindowClosingListener;
+import ch.grademasters.utils.DateLabelFormatter;
 
 public class AddExam extends JFrame{
 
@@ -28,12 +31,13 @@ public class AddExam extends JFrame{
 	private Grademasters grademasters;
 	
 	private JTextField bezeichnung;
-	private JTextField schule;
-	private JTextField textField;
+	private JTextField note;
+	private JCheckBox noteCountCheckBox;
+	private JDatePickerImpl datePicker;
 	
 	public AddExam(Grademasters grademasters) {
 		this.grademasters = grademasters;
-		setTitle("GradeMasters - Note hinzuf\u00FCgen");
+		setTitle("GradeMasters - Prüfung hinzuf\u00FCgen");
 		setBounds(100, 100, 400, 347);
 		setLocationRelativeTo(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -71,15 +75,22 @@ public class AddExam extends JFrame{
 		gbc_lblSchule.gridy = 3;
 		getContentPane().add(lblSchule, gbc_lblSchule);
 		
-		schule = new JTextField();
-		GridBagConstraints gbc_schule = new GridBagConstraints();
-		gbc_schule.gridwidth = 2;
-		gbc_schule.insets = new Insets(0, 0, 5, 5);
-		gbc_schule.fill = GridBagConstraints.HORIZONTAL;
-		gbc_schule.gridx = 3;
-		gbc_schule.gridy = 3;
-		getContentPane().add(schule, gbc_schule);
-		schule.setColumns(10);
+		SqlDateModel model = new SqlDateModel();
+		Properties p = new Properties();
+		p.put("text.today", "Heute");
+		p.put("text.month", "Monat");
+		p.put("text.year", "Jahr");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		 	
+		GridBagConstraints gbc_datum = new GridBagConstraints();
+		gbc_datum.gridwidth = 2;
+		gbc_datum.insets = new Insets(0, 0, 5, 5);
+		gbc_datum.fill = GridBagConstraints.HORIZONTAL;
+		gbc_datum.gridx = 3;
+		gbc_datum.gridy = 3;
+		getContentPane().add(datePicker, gbc_datum);
+//		datePicker.setColumns(10);
 		
 		JLabel lblNote = new JLabel("Note");
 		lblNote.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -90,15 +101,15 @@ public class AddExam extends JFrame{
 		gbc_lblNote.gridy = 5;
 		getContentPane().add(lblNote, gbc_lblNote);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 2;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 3;
-		gbc_textField.gridy = 5;
-		getContentPane().add(textField, gbc_textField);
+		note = new JTextField();
+		note.setColumns(10);
+		GridBagConstraints gbc_note = new GridBagConstraints();
+		gbc_note.gridwidth = 2;
+		gbc_note.insets = new Insets(0, 0, 5, 5);
+		gbc_note.fill = GridBagConstraints.HORIZONTAL;
+		gbc_note.gridx = 3;
+		gbc_note.gridy = 5;
+		getContentPane().add(note, gbc_note);
 		
 		JLabel lblNoteZhlt = new JLabel("Note z\u00E4hlt");
 		lblNoteZhlt.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -109,15 +120,16 @@ public class AddExam extends JFrame{
 		gbc_lblNoteZhlt.gridy = 7;
 		getContentPane().add(lblNoteZhlt, gbc_lblNoteZhlt);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("");
-		GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
-		gbc_chckbxNewCheckBox.gridwidth = 2;
-		gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 5);
-		gbc_chckbxNewCheckBox.gridx = 3;
-		gbc_chckbxNewCheckBox.gridy = 7;
-		getContentPane().add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
+		noteCountCheckBox = new JCheckBox("");
+		GridBagConstraints gbc_noteCountCheckBox = new GridBagConstraints();
+		gbc_noteCountCheckBox.gridwidth = 2;
+		gbc_noteCountCheckBox.insets = new Insets(0, 0, 5, 5);
+		gbc_noteCountCheckBox.gridx = 3;
+		gbc_noteCountCheckBox.gridy = 7;
+		getContentPane().add(noteCountCheckBox, gbc_noteCountCheckBox);
 		
 		JButton abbrechenButton = new JButton("Abbrechen");
+		abbrechenButton.addActionListener(new AddExamListener(grademasters, this));
 		GridBagConstraints gbc_abbrechenButton = new GridBagConstraints();
 		gbc_abbrechenButton.insets = new Insets(0, 0, 5, 5);
 		gbc_abbrechenButton.anchor = GridBagConstraints.WEST;
@@ -125,7 +137,8 @@ public class AddExam extends JFrame{
 		gbc_abbrechenButton.gridy = 9;
 		getContentPane().add(abbrechenButton, gbc_abbrechenButton);
 		
-		JButton hinzufügenButton = new JButton("Hinzuf\u00FCgen");
+		JButton hinzufügenButton = new JButton("Hinzufügen");
+		hinzufügenButton.addActionListener(new AddExamListener(grademasters, this));
 		GridBagConstraints gbc_hinzufügenButton = new GridBagConstraints();
 		gbc_hinzufügenButton.anchor = GridBagConstraints.EAST;
 		gbc_hinzufügenButton.insets = new Insets(0, 0, 5, 5);
@@ -136,6 +149,38 @@ public class AddExam extends JFrame{
 		this.addWindowListener(new WindowClosingListener(grademasters));
 		
 		this.setVisible(true);
+	}
+
+	public JTextField getBezeichnung() {
+		return bezeichnung;
+	}
+
+	public void setBezeichnung(JTextField bezeichnung) {
+		this.bezeichnung = bezeichnung;
+	}
+
+	public JTextField getNote() {
+		return note;
+	}
+
+	public void setNote(JTextField note) {
+		this.note = note;
+	}
+
+	public JCheckBox getNoteCountCheckBox() {
+		return noteCountCheckBox;
+	}
+
+	public void setNoteCountCheckBox(JCheckBox noteCountCheckBox) {
+		this.noteCountCheckBox = noteCountCheckBox;
+	}
+
+	public JDatePickerImpl getDatePicker() {
+		return datePicker;
+	}
+
+	public void setDatePicker(JDatePickerImpl datePicker) {
+		this.datePicker = datePicker;
 	}
 
 	
