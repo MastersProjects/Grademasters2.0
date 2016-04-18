@@ -15,16 +15,16 @@ public class Semester {
 			double allGrades = 0.0;
 			double numberOfGrades = 0.0;
 			for (Subject subject : subjects) {
-				allGrades = allGrades + subject.getAvarageGrade();
-				numberOfGrades++;
+				if (subject.getAvarageGrade() != 0) {
+					allGrades = allGrades + subject.getAvarageGrade();
+					numberOfGrades++;
+				}
 			}
-			
-			if(numberOfGrades != 0){
+
+			if (numberOfGrades != 0) {
 				avarageGrade = allGrades / numberOfGrades;
 			}
 		}
-		
-		
 
 		return avarageGrade;
 	}

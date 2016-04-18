@@ -38,7 +38,7 @@ public class AddExamListener implements ActionListener {
 
 				try {
 					double note = new Double(noteString);
-					if (note >= 0 && note <= 6) {
+					if (note >= 1 && note <= 6) {
 						Controller.getInstance().createExam(bezeichnung, note, selectedDate, countNote,
 								grademasters.getSelectedSubjectID());
 						grademasters
@@ -47,12 +47,12 @@ public class AddExamListener implements ActionListener {
 						grademasters.setEnabled(true);
 						addExam.dispose();
 					} else {
-						JOptionPane.showMessageDialog(null, "Bitte eine Zahl von 0-6 eingeben!", "Warnung!",
+						JOptionPane.showMessageDialog(null, "Bitte eine Zahl von 1-6 eingeben!", "Warnung!",
 								JOptionPane.ERROR_MESSAGE);
 					}
 
 				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null, "Bitte eine Zahl von 0-6 eingeben!", "Warnung!",
+					JOptionPane.showMessageDialog(null, "Bitte eine Zahl von 1-6 eingeben!", "Warnung!",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
