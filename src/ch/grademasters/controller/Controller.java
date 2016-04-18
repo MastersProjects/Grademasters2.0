@@ -34,7 +34,6 @@ public class Controller {
 	}
 	
 	public boolean loginUser(String username, String password){
-		//TODO Login Validations
 		boolean login = false;
 		if(password.equals(USER_JDBC.loginUser(username))){
 			login = true;

@@ -48,6 +48,7 @@ public class Login extends JFrame {
 
 	public Login() {
 		setTitle("Grademasters - Login");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Jpanel Settings
 		Image img = null;
 		try {

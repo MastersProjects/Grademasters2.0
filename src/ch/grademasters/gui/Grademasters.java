@@ -65,6 +65,7 @@ public class Grademasters extends JFrame {
 	public Grademasters(User user) {
 		this.setUser(user);
 		setTitle("GradeMasters");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Image img = null;
 		try {
 			img = ImageIO.read(getClass().getResource("/images/icon.png"));
