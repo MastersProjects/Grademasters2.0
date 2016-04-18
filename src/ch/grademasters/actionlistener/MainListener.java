@@ -22,8 +22,10 @@ public class MainListener implements ActionListener{
 			grademasters.setEnabled(false);
 			new AddSemester(grademasters);
 		} else if (buttonText.equals("Fach hinzufügen")){
+			grademasters.setEnabled(false);
 			new AddSubject(grademasters);
 		} else if (buttonText.equals("Prüfung hinzufügen")){
+			grademasters.setEnabled(false);
 			new AddExam(grademasters);
 		}
 	}

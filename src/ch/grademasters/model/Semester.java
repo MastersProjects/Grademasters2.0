@@ -4,10 +4,25 @@ import java.util.ArrayList;
 
 public class Semester {
 	private String name;
-	private int id ;
+	private int id;
 	private String school;
-	private ArrayList<Subject> subjects;	
-	
+	private ArrayList<Subject> subjects;
+
+	public Double getAvarageGrade() {
+		double avarageGrade = 0;
+
+		if (subjects != null) {
+			double allGrades = 0;
+			double numberOfGrades = 0;
+			for (Subject subject : subjects) {
+				allGrades = allGrades + subject.getAvarageGrade();
+				numberOfGrades++;
+			}
+			avarageGrade = allGrades / numberOfGrades;
+		}
+
+		return avarageGrade;
+	}
 
 	public String getName() {
 		return name;

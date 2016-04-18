@@ -5,7 +5,6 @@ import java.util.Date;
 public class Exam {
 	private String name;
 	private float grade;
-	//TODO Date?
 	private Date date;
 	private boolean count;
 	private int id;
