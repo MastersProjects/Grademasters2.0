@@ -7,19 +7,21 @@ public class Subject {
 	private int id;
 	private ArrayList<Exam> exams;
 
-	public Double getAvarageGrade() {
-		double avarageGrade = 0;
+	public double getAvarageGrade() {
+		double avarageGrade = 0.0;
 
 		if (exams != null) {
-			double allGrades = 0;
-			double numberOfGrades = 0;
+			double allGrades = 0.0;
+			double numberOfGrades = 0.0;
 			for (Exam exam : exams) {
 				if (exam.isCount()) {
 					allGrades = allGrades + exam.getGrade();
 					numberOfGrades++;
 				}
 			}
-			avarageGrade = allGrades / numberOfGrades;
+			if(numberOfGrades != 0){
+				avarageGrade = allGrades / numberOfGrades;
+			}
 		}
 
 		return avarageGrade;

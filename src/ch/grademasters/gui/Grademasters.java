@@ -138,7 +138,7 @@ public class Grademasters extends JFrame {
 
 		JButton semesterLogoutButton = new JButton("Abmelden");
 		semesterSouthPanel.add(semesterLogoutButton);
-		semesterLogoutButton.addActionListener(new BackButtonListener(cards, "Abmelden"));
+		semesterLogoutButton.addActionListener(new BackButtonListener(cards, "Abmelden", this));
 
 		/*
 		 * Subject Card
@@ -196,7 +196,7 @@ public class Grademasters extends JFrame {
 
 		JButton subjectBackButton = new JButton("Zur\u00FCck");
 		subjectSouthPanle.add(subjectBackButton);
-		subjectBackButton.addActionListener(new BackButtonListener(cards, "semesterCard"));
+		subjectBackButton.addActionListener(new BackButtonListener(cards, "semesterCard", this));
 
 		/*
 		 * Exam Card
@@ -254,7 +254,7 @@ public class Grademasters extends JFrame {
 
 		JButton examBackButton = new JButton("Zur\u00FCck");
 		examSouthPanel.add(examBackButton);
-		examBackButton.addActionListener(new BackButtonListener(cards, "subjectCard"));
+		examBackButton.addActionListener(new BackButtonListener(cards, "subjectCard", this));
 
 		createSemesterTableModel();
 

@@ -51,7 +51,7 @@ public class ExamJDBCdao extends Database {
 				exam.setName(rs.getString("Name"));
 				exam.setGrade(rs.getFloat("Grade"));
 				exam.setDate(rs.getDate("Date"));
-				exam.setCount(rs.getBoolean("Grade"));
+				exam.setCount(rs.getBoolean("Count"));
 				
 				exams.add(exam);
 			}
