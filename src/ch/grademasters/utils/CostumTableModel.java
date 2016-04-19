@@ -26,8 +26,8 @@ public class CostumTableModel extends AbstractTableModel {
 		this.setButtonListener(buttonListener);
 		
 		buttons = new ArrayList<JButton>();
-		for(Vector<String> rows : DATAS){
-			JButton button = new JButton((String)rows.get(rows.size()-1));
+		for(@SuppressWarnings("unused") Vector<String> rows : DATAS){
+			JButton button = new JButton();
 			button.addActionListener(buttonListener);
 			buttons.add(button);
 		}

@@ -18,6 +18,7 @@ import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,6 +40,7 @@ import ch.grademasters.model.Subject;
 import ch.grademasters.model.User;
 import ch.grademasters.utils.CostumTableModel;
 import ch.grademasters.utils.JTableButtonRenderer;
+import ch.grademasters.utils.JTableCheckBoxRenderer;
 
 public class Grademasters extends JFrame {
 
@@ -352,13 +354,13 @@ public class Grademasters extends JFrame {
 		columnNames.add("Name");
 		columnNames.add("Datum");
 		columnNames.add("Note");
-		columnNames.add("Prüfung");
+		columnNames.add("Zählt");
 
 		Vector<Object> columnTypes = new Vector<Object>();
 		columnTypes.add(String.class);
 		columnTypes.add(String.class);
 		columnTypes.add(Double.class);
-		columnTypes.add(JButton.class);
+		columnTypes.add(JComboBox.class);
 
 		@SuppressWarnings("rawtypes")
 		Vector<Vector> datas = new Vector<Vector>();
@@ -374,7 +376,7 @@ public class Grademasters extends JFrame {
 					row.add(df.format(exam.getDate()));
 				}
 				row.add(exam.getGrade());
-				row.add("->");
+				row.add(exam.isCount());
 
 				datas.add(row);
 			}
@@ -384,8 +386,8 @@ public class Grademasters extends JFrame {
 		examTable.setEnabled(false);
 
 		if (exams != null) {
-			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
-			examTable.getColumn("Prüfung").setCellRenderer(buttonRenderer);
+			TableCellRenderer checkBoxRenderer = new JTableCheckBoxRenderer();
+			examTable.getColumn("Zählt").setCellRenderer(checkBoxRenderer);
 			examTable.addMouseListener(new JTableButtonMouseListener(examTable));
 		}
 
