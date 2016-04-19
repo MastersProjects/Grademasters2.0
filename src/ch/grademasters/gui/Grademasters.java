@@ -290,8 +290,7 @@ public class Grademasters extends JFrame {
 			}
 		}
 
-		semesterTable
-				.setModel(new CostumTableModel(columnNames, columnTypes, datas, new SemesterTableButtonListener(this)));
+		semesterTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new SemesterTableButtonListener(this)));
 		semesterTable.setEnabled(false);
 		if (user.getSemesters() != null) {
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
@@ -332,8 +331,7 @@ public class Grademasters extends JFrame {
 			}
 		}
 
-		subjectTable
-				.setModel(new CostumTableModel(columnNames, columnTypes, datas, new SubjectTableButtonListener(this)));
+		subjectTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new SubjectTableButtonListener(this)));
 		subjectTable.setEnabled(false);
 		if (user.getSemesters().get(iterator).getSubjects() != null) {
 			TableCellRenderer buttonRenderer = new JTableButtonRenderer();
@@ -382,8 +380,7 @@ public class Grademasters extends JFrame {
 			}
 		}
 
-		examTable.setModel(
-				new CostumTableModel(columnNames, columnTypes, datas, new ExamTableButtonListener(this, exams)));
+		examTable.setModel(new CostumTableModel(columnNames, columnTypes, datas, new ExamTableButtonListener(this, exams)));
 		examTable.setEnabled(false);
 
 		if (exams != null) {
