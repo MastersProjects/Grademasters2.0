@@ -14,7 +14,7 @@ public class JTableCheckBoxRenderer implements TableCellRenderer {
 			int row, int column) {
 		
 		JCheckBox checkBox = new JCheckBox();
-		checkBox.setLabel("Zählt");
+		checkBox.setLabel("Note zählt");
 		checkBox.setEnabled(false);
 		checkBox.setSelected((boolean)value);
 		return checkBox;

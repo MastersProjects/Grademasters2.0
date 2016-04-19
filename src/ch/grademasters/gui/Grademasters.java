@@ -354,7 +354,7 @@ public class Grademasters extends JFrame {
 		columnNames.add("Name");
 		columnNames.add("Datum");
 		columnNames.add("Note");
-		columnNames.add("Zählt");
+		columnNames.add("Note zählt");
 
 		Vector<Object> columnTypes = new Vector<Object>();
 		columnTypes.add(String.class);
@@ -387,7 +387,7 @@ public class Grademasters extends JFrame {
 
 		if (exams != null) {
 			TableCellRenderer checkBoxRenderer = new JTableCheckBoxRenderer();
-			examTable.getColumn("Zählt").setCellRenderer(checkBoxRenderer);
+			examTable.getColumn("Note zählt").setCellRenderer(checkBoxRenderer);
 			examTable.addMouseListener(new JTableButtonMouseListener(examTable));
 		}
 
