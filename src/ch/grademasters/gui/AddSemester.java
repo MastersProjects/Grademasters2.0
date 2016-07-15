@@ -95,14 +95,14 @@ public class AddSemester extends JFrame {
 		gbc_abbrechenButton.gridy = 5;
 		getContentPane().add(abbrechenButton, gbc_abbrechenButton);
 
-		JButton hinzufügenButton = new JButton("Hinzufügen");
-		hinzufügenButton.addActionListener(new AddSemesterListener(grademasters, this));
-		GridBagConstraints gbc_hinzufügenButton = new GridBagConstraints();
-		gbc_hinzufügenButton.anchor = GridBagConstraints.EAST;
-		gbc_hinzufügenButton.insets = new Insets(0, 0, 5, 5);
-		gbc_hinzufügenButton.gridx = 4;
-		gbc_hinzufügenButton.gridy = 5;
-		getContentPane().add(hinzufügenButton, gbc_hinzufügenButton);
+		JButton hinzufgenButton = new JButton("Hinzufï¿½gen");
+		hinzufgenButton.addActionListener(new AddSemesterListener(grademasters, this));
+		GridBagConstraints gbc_hinzufgenButton = new GridBagConstraints();
+		gbc_hinzufgenButton.anchor = GridBagConstraints.EAST;
+		gbc_hinzufgenButton.insets = new Insets(0, 0, 5, 5);
+		gbc_hinzufgenButton.gridx = 4;
+		gbc_hinzufgenButton.gridy = 5;
+		getContentPane().add(hinzufgenButton, gbc_hinzufgenButton);
 
 		this.addWindowListener(new WindowClosingListener(grademasters));
 
